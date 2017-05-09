@@ -38,7 +38,7 @@ public class Scraper {
       if (record != null) {
 
         logger.debug("Guardando datos de {}", id_llamado);
-        //dao.guardar(id_llamado.toString(), record);
+        dao.guardar(id_llamado.toString(), record);
       } else {
 
         logger.error("No se pudo recuperar el registro {}", id_llamado.toString());
