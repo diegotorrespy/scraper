@@ -11,4 +11,5 @@ public interface Dao {
    * @param record
    */
   void guardar(String id, String record);
+  void saveFile(String id, String record);
 }
