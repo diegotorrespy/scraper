@@ -1,4 +1,4 @@
-package py.gov.ocds.scraper;
+package py.gov.ocds.parametros;
 
 import java.util.HashMap;
 import java.util.Map;

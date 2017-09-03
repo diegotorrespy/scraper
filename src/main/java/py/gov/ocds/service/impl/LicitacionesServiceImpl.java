@@ -4,19 +4,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import py.gov.ocds.scraper.Parametros;
-import py.gov.ocds.service.interfaz.LicitacionesServiceInterface;
+import py.gov.ocds.factory.RetrofitBuilder;
+import py.gov.ocds.parametros.Parametros;
+import py.gov.ocds.service.iface.LicitacionesService;
+import py.gov.ocds.service.retrofit.BuscadoresCaller;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
- * Created by diego on 01/05/17.
+ * Created by diego on 06/08/17.
  */
-public class LicitacionesService extends BaseService{
+public class LicitacionesServiceImpl implements LicitacionesService {
 
-  private static final Logger logger = LoggerFactory.getLogger(LicitacionesService.class);
+  private static final Logger logger = LoggerFactory.getLogger(LicitacionesServiceImpl.class);
 
-  LicitacionesServiceInterface service = retrofit.create(LicitacionesServiceInterface.class);
+  BuscadoresCaller service = RetrofitBuilder.build().create(BuscadoresCaller.class);
 
   public JSONArray recuperarLicitaciones(Parametros criterios) {
 
@@ -46,4 +48,5 @@ public class LicitacionesService extends BaseService{
 
     return licitaciones;
   }
+
 }
