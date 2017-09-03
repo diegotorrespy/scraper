@@ -25,7 +25,7 @@ public class AutenticacionService extends BaseService {
       Call<String> autenticacion = service.accesToken("Basic " + Aplicacion.REQUEST_TOKEN);
       JSONObject token = new JSONObject(autenticacion.execute().body().toString());
 
-      return token.getString("access_token");
+      return "Bearer " + token.getString("access_token");
 
     } catch (IOException e) {
       logger.error("Ocurrio un error en el servicio de autorizacion",e);

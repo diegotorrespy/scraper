@@ -2,6 +2,7 @@ package py.gov.ocds.service.interfaz;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 
 /**
@@ -10,5 +11,5 @@ import retrofit2.http.Path;
 public interface OCDSServiceInterface {
 
   @GET("/datos/api/v2/doc/ocds/record-package/{id}")
-  Call<String> recordPackage(@Path("id") String id);
+  Call<String> recordPackage(@Header("Authorization") String token, @Path("id") String id);
 }

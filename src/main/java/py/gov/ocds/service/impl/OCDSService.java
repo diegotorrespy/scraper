@@ -2,6 +2,7 @@ package py.gov.ocds.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import py.gov.ocds.service.interfaz.AutenticacionServiceInterface;
 import py.gov.ocds.service.interfaz.OCDSServiceInterface;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -15,19 +16,23 @@ public class OCDSService extends BaseService{
 
   OCDSServiceInterface service = retrofit.create(OCDSServiceInterface.class);
 
+
   public String recordPackage(String id) {
     String recordPackage = null;
     try {
+        AutenticacionService authService = new AutenticacionService();
 
       Call<String> recordPackageReq = null;
       Integer intentos = 0;
       do {
-
+          String token = authService.accessToken();
         intentos++;
-        recordPackageReq = service.recordPackage(id);
-
+        recordPackageReq = service.recordPackage(token,id);
         Response res = recordPackageReq.execute();
-
+        if(res.code() != 200) {
+          System.out.println(res.code());
+          System.out.println(id);
+        }
         if (res.body() != null) {
           recordPackage = res.body().toString();
         } else {

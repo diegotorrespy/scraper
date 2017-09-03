@@ -24,11 +24,10 @@ public class Scraper {
     logger.warn("Recuperando licitaciones");
     JSONArray procesos = licitaciones.recuperarLicitaciones(Parametros.builder()
             .put("fecha_desde", "2010-01-01")
-            .put("fecha_hasta", "2010-07-01")
+            .put("fecha_hasta", "2017-12-31")
             .put("tipo_fecha", "ENT")
             .put("tipo_licitacion", "tradicional")
-            .put("offset", "0")
-            .put("limit", "2"));
+            .put("show_pagination", "false"));
 
     for (int i = 0; i < procesos.length(); i++) {
 
@@ -38,7 +37,7 @@ public class Scraper {
       if (record != null) {
 
         logger.debug("Guardando datos de {}", id_llamado);
-        dao.guardar(id_llamado.toString(), record);
+        dao.saveFile(id_llamado.toString(), record);
       } else {
 
         logger.error("No se pudo recuperar el registro {}", id_llamado.toString());
